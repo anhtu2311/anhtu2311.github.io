@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anh Tú Nguyễn</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #f8f9fa;
+            padding: 40px 30px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .sidebar h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .sidebar .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .contact-info {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #4a5568;
+        }
+
+        .contact-item i {
+            width: 20px;
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 60px 80px;
+            flex: 1;
+        }
+
+        .countdown {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 40px;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '👋';
+            margin-right: 12px;
+            font-size: 32px;
+        }
+
+        .section-title.education::before {
+            content: '🎓';
+        }
+
+        .section-title.experience::before {
+            content: '💼';
+        }
+
+        .section-title.projects::before {
+            content: '🚀';
+        }
+
+        .section-title.skills::before {
+            content: '⚡';
+        }
+
+        .intro-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .card {
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .card-subtitle {
+            font-size: 16px;
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .card-meta {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .card-description {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .card-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-list li {
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: #4a5568;
+            position: relative;
+        }
+
+        .card-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            margin-bottom: 20px;
+        }
+
+        .skill-category h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .skill-category p {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 968px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 40px 30px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        #countdown-timer {
+            font-weight: 700;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile-img">NAT</div>
+            <h1>Nguyễn Ngọc Anh Tú</h1>
+            <p class="subtitle">Marketing & Business Administration Student at Open University</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Ho Chi Minh City, VN</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:nnat2311@gmail.com">nnat2311@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>0967979768</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/tú-nguyễn-ngọc-anh-2439252b9/" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="countdown">
+                CFA Level 1 Exam: <span id="countdown-timer"></span> until May 2026
+            </div>
+
+            <section class="section">
+                <h2 class="section-title">Introduction</h2>
+                <p class="intro-text">
+                    Hi there! 👋 I'm Nguyễn Ngọc Anh Tú, a final-year student at <span class="highlight">Open University</span> pursuing a Bachelor's degree in Marketing with a focus on Business Administration.
+                </p>
+                <p class="intro-text">
+                    Originally from Ho Chi Minh City, Vietnam, I am passionate about supply chain management, business operations, and strategic planning. With hands-on experience in warehouse operations and e-commerce, I'm currently preparing for my <span class="highlight">CFA Level 1 certification</span> and aspiring to become a Management Trainee.
+                </p>
+                <p class="intro-text">
+                    My interests span across ERP systems (SAP), quantitative analysis, and business strategy. I'm also the founder of an online resell and retail business, where I've developed expertise in e-commerce operations and customer relations.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title education">Education</h2>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Open University</h3>
+                            <p class="card-subtitle">Bachelor's in Marketing - Business Administration</p>
+                            <p class="card-meta">CGPA: 3.3/4.0 • Final Year Student</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="card-meta">Ho Chi Minh City, VN</p>
+                            <p class="card-meta">2022 - 2026</p>
+                        </div>
+                    </div>
+                    <p class="card-description">
+                        Relevant subjects: ERP, Business Strategy, Quantitative Analysis in Management, Customer Behaviour, HRM, Financial Management, Sales Management, Operations Management, Project Management.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">VNU-HCM High School for the Gifted</h3>
+                            <p class="card-subtitle">Class: KC3 - GPA > 8.5</p>
+                            <p class="card-meta">English: 9.6/10 (National High School Graduation Examination) - top 0.73% of Vietnam in 2022</p>
+                            <p class="card-meta">IELTS: 6.5 (2019)</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="card-meta">District 5, HCM</p>
+                            <p class="card-meta">2019 - 2022</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title experience">Experience</h2>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">FM Supply Chain Vietnam Company Limited</h3>
+                            <p class="card-subtitle">Warehouse & Operations Intern</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="card-meta">Ho Chi Minh City, VN</p>
+                            <p class="card-meta">April 2024 - June 2024</p>
+                        </div>
+                    </div>
+                    <ul class="card-list">
+                        <li>Supported warehouse operations using Smartlog Warehouse Management (SWM): processed orders, allocated pallets, verified invoices and packing lists and managed documentation.</li>
+                        <li>Verified over 100 deliveries of more than 3,000 SKUs for Thien Long Group (our main client), checking for missing or damaged goods and coordinating storage or dispatch.</li>
+                        <li>Tracked inventory using handheld devices and SWM, conducted physical stock counts, and maintained organized storage areas.</li>
+                        <li>Fulfilled over 50 orders daily for e-commerce clients, ensuring accurate picking, packing, and preparation for shipment.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title projects">Projects & Leadership</h2>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Founder / Owner – Online Resell & Retail Business</h3>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="card-meta">Ho Chi Minh City, VN</p>
+                            <p class="card-meta">November 2017 - April 2025</p>
+                        </div>
+                    </div>
+                    <p class="card-description">
+                        Specialized in consumer electronics, men's haircare, and digital products, selling primarily through online marketplaces such as Facebook Marketplace and Tiki.
+                    </p>
+                    <ul class="card-list">
+                        <li>2022 - 2025 | Consumer Electronics: Operated a B2C online store offering products from Lenovo, Logitech, Sony, Asus, JBL, and Razer. Managed inventory, marketing, pricing, and customer relations.</li>
+                        <li>2017 - 2019 | Grooming & Digital Goods: Sold men's haircare products (By Vilain, Hanz de Fuko, BluMaan) and digital gaming items from VNG via Thecaosieure.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Shark Club PTNK</h3>
+                            <p class="card-subtitle">Head of Human Resources</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="card-meta">Ho Chi Minh City, VN</p>
+                            <p class="card-meta">October 2021 - May 2022</p>
+                        </div>
+                    </div>
+                    <ul class="card-list">
+                        <li>Recruited and onboarded over 15 new members across marketing, finance, and project teams.</li>
+                        <li>Organized internal workshops on pitching, teamwork, and communication skills.</li>
+                        <li>Collaborated with the leadership team to plan club events and host mock "Shark Tank" competitions.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title skills">Skills & Interests</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Researching Tools</h3>
+                        <p>SPSS, SmartPLS 4.0</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Specialty</h3>
+                        <p>Coffee, Audiophile, Novels</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Volunteers</h3>
+                        <p>Home English tutor for local primary students</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Certifications</h3>
+                        <p>Preparing for CFA Level 1 (May 2026), Aspiring Management Trainee, Self-study on SAP ERP fundamentals</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('May 1, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown-timer').innerHTML = 
+                days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+
+            if (distance < 0) {
+                document.getElementById('countdown-timer').innerHTML = "The exam has begun!";
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
